@@ -1,0 +1,161 @@
+rdbms:
+
+key : 
+Non Key
+super key
+candiate key
+alternate key
+primary key
+foreign key
+unique
+composite key
+surrogate key
+
+
+Table/Enity
+    row / tuple /record / document
+    column/attribute/field
+
+ID	name	salary	Mob
+1	Jack	1000	m1
+2	John	2000	m2
+
+key: The attribute which identify the row uniquely
+eg: id , mobile
+
+Non key: The attribute which do not identify the row uniquely
+eg: name, salary
+
+super key: The attribute or set of attributes which identify the row uniquely.
+
+subset of attributes which identify the row uniquely
+subset 1,2 3 = {1,2,3}, {1,2} ,{1,3}, {2,3},{1}, {2},{3} => 2^n -1
+
+column(s)               is_row_uniquley_identified    minimal_set_count
+-------------------     ---------------------------   ------------------
+id + name + sal + mob    Yes                            4
+id + name + sal          Yes                            3
+name + sal + mob         Yes                            3
+id+name                  Yes                            2
+name+ sal                No
+sal+ mob                 Yes                            2
+id                       Yes                            1
+name                     No
+sal                      No
+mob                      Yes                            1
+
+
+Another eg: sales_order
+
+order_no	item	    qty	rate	total
+1	        Pen	        10	20	    200
+1	        Pencil	    20	5	    100
+1	        Notebook	5	40	    200
+2	        Pen	        20	20	    400
+3	        Pencil	    5	5	    25
+3	        Notebook	2	40	    80
+
+column(s)               is_row_uniquley_identified
+-------------------     ---------------------------
+o+i+q+r+t               Y
+o+i+q                   Y
+o+i                     Y
+i+q                     N
+q+r                     N
+r+t                     N
+o                       N
+i                       N
+q                       N
+r                       N
+t                       N
+
+
+Candidate key: Column or set of columns which identify the row uniquely.
+It is the minimal set of super key.
+
+for emp table: id ,  mob is candidate key
+
+for sales table: order+item
+
+
+Primary key: Primay key is a candidate key which can uniquely identify the row and it cannot be null.
+
+emp: pk => id
+sales : pk => order+item
+
+
+alternate key: 
+emp: alternate key=> mob
+     sales => 
+
+
+foreign key: The candidate key which refer in another table
+
+
+unique key: The candidate key where null is allowed.
+
+
+composite key: the candidate key having more than one columns.
+
+
+surrogate key: The key which don't have actual meaning in the table. Just for the uniquness , column is added.
+
+uploading the file
+
+fileid    path    uploaded_timestamp  status   error_msg
+1
+
+
+Emp:
+
+id card:
+semester: 1
+enrollment no:
+subject: 
+
+
+semester: 1
+enrollment no:  96
+name:
+father name:
+subject:
+
+
+enroll_id,fnmae, lname, father_name, mother_name, dob, birth_mark
+
+
+differnce b/w primary key and unique key:
+
+primary key is a candidate key where null is not allowed.
+unqiue key is a candidate key where null is  allowed.
+
+candiate key: attribute or set of attributes which identify the row uniquely
+              and it is a minimal set of super key.
+
+
+id  name  salary mob
+
+id + name +sal +mob 4
+id+name+sal 3
+id+name 2
+
+sal +mob 2
+id   1
+
+mob 1
+
+
+
+Normalization:
+--------------
+normal from
+1 NF
+2 NF
+3 NF
+
+
+
+
+
+
+
