@@ -1,0 +1,106 @@
+DML
+  Select
+  insert
+  update
+  delete
+
+
+DDL
+ Create
+ alter
+ rename
+ truncate
+ drop
+ 
+
+TCL
+  commit
+  rollback
+  savepoint
+
+DCL
+  grant
+  revoke
+
+emp
+id	name	salary
+1	Jack	1000
+2	John	2000
+3		
+
+
+query
+1. insert name as sam and salary = 3000 in the third row
+update emp
+set name = 'Sam' , salary= 3000
+where id= 3;
+
+2. delete salary 1000
+update emp
+set salary = null
+where id = 3;
+
+insert will add the new record
+update will do the changes in existing row
+delete will remove the row
+
+
+
+Function
+---------
+Single row Function
+    char function
+     lower, upper, initcap
+     substr
+     instr
+     concat
+     lpad, rpad
+
+    number function
+        mod
+        trunc
+        round
+        floor
+        ceil
+
+    date function
+        months_between
+        add_months
+        next_day
+        last_day
+
+    conversion function
+        to_char
+        to_date
+        to_number
+
+
+    general function
+        nvl
+        nvl2
+        coalesce
+        case 
+        decode 
+
+
+Multiple row function/ aggregate function/ group function
+count
+min
+max
+avg
+sum
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
