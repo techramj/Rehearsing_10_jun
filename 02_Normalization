@@ -1,0 +1,19 @@
+Normalization: It is the process to minimize the redundancy of the data and remove the anamolies.
+
+anamolies: insert/update/delete
+
+1 NF: Attribute  should not be repeated, and divide the attribute in the meaning full attribute.
+     row should be uniquely identify.
+     I nf => primary key
+
+
+2 NF: The table must be 1 nf and each non-key should depend upon key.
+IF the table is not normalized to 2 nf, then we can face anamolies problem.
+
+
+3 NF: The table must be 2 nf and the non-key should not depend upon other non-key.
+
+A -> B, B-> C then  A, B, C should not be in the same table
+
+
+
