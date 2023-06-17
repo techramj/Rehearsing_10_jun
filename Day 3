@@ -1,0 +1,175 @@
+--create table
+
+emp
+ID NAME salary did
+pk              fk
+did -> dept.did
+
+
+
+dept
+did dname  emp_id
+pk         fk
+emp_id -> dept.id
+
+
+DROP TABLE emp;
+DROP TABLE dept;
+
+
+CREATE TABLE dept
+(did NUMBER PRIMARY KEY,
+ dname VARCHAR2(30),
+ emp_id NUMBER
+ );
+ 
+ CREATE TABLE emp
+ (ID NUMBER PRIMARY KEY,
+  NAME VARCHAR2(20),
+  salary NUMBER,
+  did NUMBER REFERENCES dept(did)
+  );
+
+
+ALTER TABLE dept
+ADD (FOREIGN KEY(emp_id) REFERENCES emp(ID) );
+
+INSERT INTO dept(did, dname)  VALUES (10, 'IT');
+INSERT INTO emp VALUES (1,'Jack',1000,10);
+UPDATE dept
+SET emp_id=1
+WHERE did = 10;
+
+SELECT * FROM dept;
+SELECT *  FROM emp;
+
+
+
+
+
+CREATE TABLE example1
+(ID NUMBER);
+
+SELECT * FROM example1;
+--delete all the duplicate values
+
+DELETE example1
+WHERE ROWID NOT IN (SELECT MIN(ROWID) FROM example1
+                    GROUP BY ID);
+
+
+--working of the select query 
+--id,name,salary,did
+
+SELECT last_name,salary AS sal
+FROM employees
+WHERE sal = 2000;
+
+
+--execution
+--FROM ->WHERE ->GROUP BY -> HAVING -> SELECT -> ORDER BY
+
+SELECT last_name,salary AS sal
+FROM employees
+WHERE salary > 2000
+ORDER BY sal;
+
+
+--rownum
+SELECT last_name,salary AS sal
+FROM employees
+WHERE ROWNUM <= 2;
+
+SELECT DISTINCT salary FROM employees
+ORDER BY 1 DESC
+--- find the 2nd highest or nth highest salary
+
+--method 1
+SELECT MAX(salary) 
+FROM employees
+WHERE salary < (SELECT MAX(salary) FROM employees); 
+
+
+--method 2 (nth highest)
+SELECT MIN(salary) FROM (
+SELECT DISTINCT salary 
+FROM employees
+ORDER BY salary DESC
+)
+WHERE ROWNUM<= &n;
+
+
+--method 3 (nth highest)
+SELECT * FROM (
+SELECT salary, ROWNUM AS RANK
+  FROM (SELECT DISTINCT salary FROM employees ORDER BY salary DESC)
+ )
+WHERE RANK = &n;
+
+
+
+--method4 (nth highest)
+SELECT salary
+FROM employees e
+WHERE &n-1 = (SELECT COUNT(DISTINCT salary) FROM employees 
+              WHERE salary >e.salary);
+
+
+--method5 (nth highest)
+--dense_rank() is a window function
+SELECT * FROM (
+SELECT employee_id,salary, 
+dense_rank() OVER (ORDER BY salary DESC) AS RANK
+FROM employees
+)
+WHERE RANK = &n;
+
+
+--list of employees whose first_name and last_name start with same character
+-- eg: Sonu Sood , Aalu Arjun.
+
+SELECT first_name,last_name
+FROM employees
+WHERE SUBSTR(first_name,1,1) = SUBSTR(last_name,1,1);
+
+
+--list of employees whose first_name  start with same character
+-- eg: Alya
+SELECT DISTINCT first_name
+FROM employees
+WHERE LOWER(SUBSTR(first_name,1,1)) = LOWER(SUBSTR(first_name,-1,1));
+
+/*
+single row function
+  char function
+     lower, ,upper, initcap
+     instr
+     substr
+     replace
+     
+   number function
+     mod
+     trunc,round
+     ceil, floor
+    
+   date function
+     add_months
+     next_day
+     last_day
+     months_between
+     
+   conversion function
+    to_char
+    to_number
+    to_date
+    
+   general function
+    nvl, nvl2,coalesce
+    decode, case   
+ */
+
+
+--list of employees who is hired in feb month of leap year
+
+
+
