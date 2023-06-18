@@ -1,0 +1,181 @@
+--Join
+
+--type of join
+--inner join vs outer join
+
+SELECT employee_id, last_name, department_id,
+department_name
+FROM employees JOIN departments 
+USING (department_id);
+
+SELECT employee_id, last_name, department_id,
+department_name, departments.manager_id
+FROM employees JOIN departments 
+USING (department_id);
+
+SELECT employee_id, last_name, department_id,
+department_name, d.manager_id
+FROM employees e  JOIN departments d 
+USING (department_id);
+
+SELECT employee_id, last_name, e.department_id,
+department_name, d.manager_id
+FROM employees e  JOIN departments d 
+ON e.department_id = d.department_id;
+
+
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_name
+FROM employees e  JOIN departments d 
+ON e.department_id = d.department_id;
+
+--ansi 1999
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_name
+FROM employees e , departments d 
+WHERE e.department_id = d.department_id;
+
+
+--outer join
+  --left outer join = inner join + all the rows of left table
+  --right outer join =inner join + all the rows of right table
+  --full outer join== inner join + all the rows of boht the table
+
+--left outer join 
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_name
+FROM employees e  LEFT OUTER JOIN departments d 
+ON e.department_id = d.department_id;
+
+--left outer join with ansi 1999
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_name
+FROM employees e , departments d 
+WHERE e.department_id = d.department_id(+);
+
+
+--right outer join 
+SELECT e.employee_id, e.last_name, d.department_id,
+d.department_name
+FROM employees e  RIGHT OUTER JOIN departments d 
+ON e.department_id = d.department_id;
+
+--right outer join with ansi 1999
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_name
+FROM employees e , departments d 
+WHERE e.department_id(+) = d.department_id;
+
+
+
+--full outer join 
+SELECT e.employee_id, e.last_name, d.department_id,
+d.department_name
+FROM employees e  FULL OUTER JOIN departments d 
+ON e.department_id = d.department_id;
+
+--full outer join with ansi 1999
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_name
+FROM employees e , departments d 
+WHERE e.department_id(+) = d.department_id(+); --error, full join not allowed
+
+
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_name
+FROM employees e , departments d 
+WHERE e.department_id = d.department_id(+)
+UNION
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_name
+FROM employees e , departments d 
+WHERE e.department_id(+) = d.department_id;
+
+
+
+
+SELECT COUNT(*) FROM employees; -- 107
+SELECT * FROM employees WHERE department_id IS NULL; --1
+
+--rule 1: when column is avaialble in both the table, then qualifier is mandatory
+--rule 2: column present in using column , should not have qualifer
+
+
+--equi join vs non equi join
+     --above example are of equi join
+     
+    SELECT * FROM job_grades
+    
+    SELECT e.employee_id, e.last_name, e.salary, g.grade
+    FROM employees e JOIN job_grades g
+    ON e.salary BETWEEN g.min_sal AND g.max_sal
+    ORDER BY e.salary;
+
+--join with using clause vs join with on clause vs join with ansi 1999
+
+--self join
+
+SELECT e.employee_id, e.last_name,
+e.manager_id, m.last_name AS manager_name
+FROM employees e LEFT OUTER JOIN employees m
+ON e.manager_id = m.employee_id
+ORDER BY e.employee_id;
+
+
+select e.employee_id ,e.last_name,e.department_id, 
+d.last_name as collegue_name
+from employee e join employee d
+on e.department_id = d.department_id;
+
+SELECT e.employee_id, e.last_name,
+e.department_id, c.employee_id, c.last_name AS colleage_name
+FROM employees e JOIN  employees c
+ON e.department_id = c.department_id
+AND e.employee_id != c.employee_id
+WHERE e.department_id IN (10,20,30)
+ORDER BY e.department_id,e.employee_id;
+
+
+--list of employees whose salary > their manager's salary
+
+--81499 81949@ybl => contribute min 500  
+
+
+SELECT e.employee_id, e.last_name,
+e.manager_id, m.last_name AS manager_name,
+e.salary, m.salary AS manager_salary
+FROM employees e  JOIN employees m
+ON e.manager_id = m.employee_id
+WHERE e.salary> m.salary
+ORDER BY e.employee_id;
+
+
+--join with multiple table
+--id, name, salary, dept_name, grade, manager_name,city
+SELECT e.employee_id, e.last_name, e.salary, d.department_name,
+j.grade,m.last_name AS manager_name,l.city
+FROM employees e JOIN departments d
+ON e.department_id = d.department_id
+JOIN job_grades j
+ON e.salary BETWEEN j.min_sal AND j.max_sal
+JOIN employees m
+ON e.manager_id = m.employee_id
+JOIN locations l
+ON d.location_id = l.location_id;
+
+--ansi 1999 
+
+SELECT e.employee_id, e.last_name, e.salary, d.department_name,
+j.grade,m.last_name AS manager_name,l.city
+FROM employees e , departments d , job_grades j , employees m , locations l
+WHERE e.department_id = d.department_id
+AND e.salary BETWEEN j.min_sal AND j.max_sal
+AND e.manager_id = m.employee_id
+AND d.location_id = l.location_id;
+
+
+
+
+ 
+
+
