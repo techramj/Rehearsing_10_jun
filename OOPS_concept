@@ -1,0 +1,91 @@
+Object oriented programming
+
+Abstraction
+    Fan
+    build
+    color
+    price
+    speed
+    enegry_consuption
+
+    motor: wiring
+
+encapsulation
+   bike
+    disc
+    drum
+    Abs 
+    fluid
+    Air 
+
+inheritance
+   person
+     name
+     father name
+     address
+     age
+
+
+  emp  is a person
+    id
+    salary
+    dept
+    
+
+
+polymorphism
+  signal
+     green -> start()
+     red   -> stop()
+     yellow -> look and move();
+
+
+
+  car  is a vehicle
+    startCar()
+    stop()
+
+
+  bike is a vehicle
+  startBike()
+  stop()
+
+
+  truck is a vehicle
+  startTruck()
+  stop()
+
+  
+  SUV is a vehicle
+  start()
+  stop()
+
+
+benefit:
+  mantainability
+  extensibility
+
+
+  Rohan
+   
+   Son
+     speak()
+
+  Friend
+     speak()
+
+  Student
+     speak
+
+  Lover
+    speak
+
+
+
+
+Abstraction vs Encapsulation
+
+
+
+
+static
